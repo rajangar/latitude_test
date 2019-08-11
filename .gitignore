@@ -1,0 +1,4 @@
+*.pyc
+*/__pycache__
+large.*
+output.csv

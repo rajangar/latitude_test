@@ -1,6 +1,8 @@
 import unittest
 import filecmp
+import os
 import main
+import fixedgenerator
 
 class TestFixedWidthToCSV(unittest.TestCase):
 
@@ -37,6 +39,15 @@ class TestFixedWidthToCSV(unittest.TestCase):
 			main.Main(['input/abc.txt']).run()
 		except:
 			self.assertTrue(True)
+
+	def test_large_file(self):
+		""" To test large txt file, with more than million entries
+		"""
+		fixedgenerator.GenerateFixedWidthFile().generate()
+		main.Main(['input/large.txt']).run()
+		self.assertTrue(filecmp.cmp('output/output.csv', 'output/large.csv'))
+		os.remove('input/large.txt')
+		os.remove('output/large.csv')
 
 if __name__ == '__main__':
 	unittest.main()

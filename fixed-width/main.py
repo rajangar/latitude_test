@@ -30,5 +30,5 @@ if __name__ == '__main__':
 			raise
 		main = Main(sys.argv[1:])
 		main.run()
-	except:
-		print("An error occured")
+	except Exception as e:
+		print("An error occured, error = ", e)

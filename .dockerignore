@@ -1,2 +1,5 @@
 Dockerfile
 .dockerignore
+fixed-width/input/large.*
+fixed-width/output/large.*
+fixed-width/output/output.csv
