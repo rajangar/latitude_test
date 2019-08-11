@@ -16,13 +16,13 @@ class ParseAndDumpCSV:
 		inputEncode = self.parsed_json['InputEncoding']
 		try:
 			input_fl = open(self.input_file, "r", encoding=inputEncode)
-		except:
-			print("IO Error in input file", self.input_file)
+		except Exception as e:
+			print("IO Error in input file", self.input_file, ", error = ", e)
 
 		try:
 			output_fl = open("output/output.csv", "w", encoding=self.parsed_json['OutputEncoding'], newline='')
-		except:
-			print("IO Error while opening output file")
+		except Exception as e:
+			print("IO Error while opening output file, error = ", e)
 
 		writer = csv.writer(output_fl)
 
@@ -37,6 +37,7 @@ class ParseAndDumpCSV:
 			total_width += int(offset)
 
 		line_no = 0
+		lines = []
 		for input_line in input_fl:
 			line_no += 1
 			try:
@@ -48,13 +49,19 @@ class ParseAndDumpCSV:
 				for ind, offset in enumerate(offsets):
 					line.append(input_line[length:length + int(offset)].strip())
 					length = length + int(offset)
-				writer.writerow(line)
-			except IndexError:
-				print("Error in Line no", line_no, ", skipped")
+				if line_no % 2000 == 0:
+					writer.writerows(lines)
+					lines = []
+				lines.append(line)
+
+			except IndexError as e:
+				print("Error in Line no", line_no, ", skipped, error = ", e)
 				continue
-			except:
-				print("Error in Line no", line_no, ", skipped")
+			except Exception as e:
+				print("Error in Line no", line_no, ", skipped, error = ", e)
 				continue
+
+		writer.writerows(lines)
 			
 		output_fl.close()
 		input_fl.close()

@@ -1,7 +1,7 @@
 FROM python:3.6
 
-COPY . /tmp/
+COPY . /
 
-WORKDIR /tmp/fixed-width/
+WORKDIR /fixed-width/
 
 CMD ["python", "test.py"]
