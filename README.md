@@ -3,6 +3,7 @@
 Here you can provide any fixed width file in "Windows-1252" format, the code will convert it into CSV.
 
 -	To run it with Docker:
+
 		docker build -t latitude/parser:1.0 .
 		docker run -ti --name parser latitude/parser:1.0
 
@@ -10,6 +11,7 @@ Here you can provide any fixed width file in "Windows-1252" format, the code wil
 	And Output will save in "fixed-width/output" folder.
 
 -	To run it with main.py:
+
 		cd fixed-width
 		python main.py <input-file-path>
 
